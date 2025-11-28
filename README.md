@@ -56,3 +56,18 @@ income-classification-ml/
 │   └── requirements.txt             # Python dependencies
 ├── ML_Project_Plan.docx             # Project planning document
 └── README.md                        # Documentation
+
+
+
+## 📊 Model Performance
+Experiments were tracked using MLflow. Below are the results from the top-performing models on the test set:
+
+Model	               Feature Selection	         F1-Score (CV Mean)
+XGBoost	            Variance Threshold	      0.8087
+XGBoost	            Correlation Threshold	   0.8072
+Random Forest	      Feature Importance	      0.7802
+Ridge Classifier	   None	                     0.7490
+Logistic Regression	None	                     0.6309
+
+
+##Champion Model: XGBClassifier with Variance Threshold feature selection was chosen for deployment due to its superior stability and F1-score.
