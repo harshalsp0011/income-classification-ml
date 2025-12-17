@@ -12,15 +12,46 @@ This project goes beyond simple model training by implementing a robust **MLOps 
 
 ---
 
+## 📁 Dataset Information
+
+**Dataset**: Adult Census Income Evaluation Dataset  
+**Source**: UCI Machine Learning Repository - [Adult Dataset](https://archive.ics.uci.edu/ml/datasets/adult)
+
+### Download Instructions:
+1. Visit the [UCI Adult Dataset page](https://archive.ics.uci.edu/ml/datasets/adult)
+2. Download `adult.data` (training set, 32,561 instances)
+3. Rename the file to `income_evaluation.csv` 
+4. Place it in the `Income_Classification/` folder or update the path in notebook
+
+### Required Files:
+- **Original Dataset**: `income_evaluation.csv` 
+  - Downloaded from UCI as `adult.data` and renamed
+  - Current expected path in notebook: `/content/income_evaluation.csv`
+  - **Update this path in Cell 2** before running: `file_path = 'your/path/to/income_evaluation.csv'`
+  
+- **Cleaned Dataset**: `cleaned_income_evaluation.csv` (automatically generated after running data cleaning cells)
+
+### Dataset Features (15 columns):
+The dataset contains these exact columns:
+- `age`, `workclass`, `fnlwgt`, `education`, `education-num`, `marital-status`
+- `occupation`, `relationship`, `race`, `sex`, `capital-gain`, `capital-loss`
+- `hours-per-week`, `native-country`, `income` (<=50K or >50K)
+
+### Sample Data:
+First row: `39, State-gov, 77516, Bachelors, 13, Never-married, Adm-clerical, Not-in-family, White, Male, 2174, 0, 40, United-States, <=50K`
+
+---
+
 ## 🏗️ Architecture & Workflow
 
 The project pipeline consists of five major stages:
 
 1.  **Data Engineering (SQL)**:
-    * Ingested raw `income_evaluation.csv`.
+    * Ingested raw `income_evaluation.csv` from [UCI ML Repository](https://archive.ics.uci.edu/ml/datasets/adult).
     * Cleaned and normalized data into **3rd Normal Form (3NF)** using **SQLite**.
     * Tables created: `Personal_Details`, `Employment_Details`, `Education_Details`, `Financial_Details`, `Location_Details`.
     * Data is rejoined via SQL queries for analysis.
+    * **File Path Configuration**: Update `file_path = '/content/income_evaluation.csv'` in notebook Cell 2 to your local CSV location.
 
 2.  **Exploratory Data Analysis (EDA)**:
     * Automated reporting using **ydata-profiling**.
@@ -51,6 +82,9 @@ income-classification-ml/
 │   │   └── streamlit/
 │   │       └── income.py            # User Interface
 │   ├── Classification.ipynb         # Main notebook: Data -> SQL -> MLflow
+│   ├── income_evaluation.csv        # [REQUIRED] Raw dataset (download from UCI)
+│   ├── cleaned_income_evaluation.csv # Generated after data cleaning
+│   ├── income_evaluation.db         # SQLite 3NF database (auto-generated)
 │   ├── Dockerfile                   # Docker build for the app
 │   ├── Dockerfile-fastapi           # Docker build for API
 │   └── requirements.txt             # Python dependencies
